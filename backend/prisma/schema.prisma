@@ -23,9 +23,50 @@ model User {
   telephone       String
   date_inscription DateTime @default(now())
   role            Role     @default(CLIENT)
+  commentaires     Commentaire[]
 }
 
 enum Role {
   ADMIN
   CLIENT
+}
+
+model Marque {
+  id       Int       @id @default(autoincrement())
+  nom      String
+  articles Article[]
+}
+
+model Categorie {
+  id       Int       @id @default(autoincrement())
+  nom      String
+  articles Article[]
+}
+
+model Article {
+  id           Int       @id @default(autoincrement())
+  titre          String
+  description  String
+  prix         Float
+  stock        Int
+  image        String
+  note         Float?     
+  approuve     Boolean?  
+  marque       Marque     @relation(fields: [marqueId], references: [id])
+  marqueId     Int
+  categorie    Categorie  @relation(fields: [categorieId], references: [id])
+  categorieId  Int
+  commentaires Commentaire[]
+}
+
+model Commentaire {
+  id       Int       @id @default(autoincrement())
+  userId   Int
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  articleId     Int
+  article   Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  contenu  String
+  note    Float
+  date     DateTime @default(now())
+  approuve Boolean? @default(false)
 }

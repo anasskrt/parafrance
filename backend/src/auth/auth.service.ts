@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from '@prisma/prisma.service'; // Adjust the import path as necessary
 import { Role } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
+import { UserSansMotDePasseDto } from './dto/user-sans-mdp.dto';
 
 @Injectable()
 export class AuthService {
@@ -62,7 +63,8 @@ export class AuthService {
   
     const payload = {
       sub: user.id,
-      email: user.email
+      email: user.email,
+      role: user.role,
     };
   
     const token = this.jwt.sign(payload);

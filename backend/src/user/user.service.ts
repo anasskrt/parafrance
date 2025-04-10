@@ -1,33 +1,45 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { $Enums } from '@prisma/client';
 import { PrismaService } from '@prisma/prisma.service';
-import { UserSansMotDePasseDto } from './dto/user-sans-mdp.dto';
+import { error } from 'console';
+import { UserSansMotDePasseDto } from 'src/auth/dto/user-sans-mdp.dto';
+
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
-
-  async modification(id: number, donnees: any): Promise<UserSansMotDePasseDto> {
-    if (!id) {
-      throw new Error('ID requis pour la modification.');
-    }
+  constructor(private readonly prisma: PrismaService) {}
+ 
+  async deleteCommentaire(userId: number, commentaireId: number): Promise<boolean> {
+    try {
+      const commentaire = await this.prisma.commentaire.findUnique({
+        where: { id: commentaireId },
+      });
   
-    // Champs autorisés uniquement
-    const champsAutorises = ['nom', 'prenom', 'adresse', 'telephone'];
-    const donneesFiltrees: any = {};
-  
-    for (const champ of champsAutorises) {
-      if (donnees[champ] !== undefined) {
-        donneesFiltrees[champ] = donnees[champ];
+      if (!commentaire) {
+        throw new Error('Commentaire introuvable.');
       }
+  
+      if (commentaire.userId !== userId) {
+        throw new Error('Vous ne pouvez supprimer que vos propres commentaires.');
+      }
+  
+      await this.prisma.commentaire.delete({
+        where: { id: commentaireId },
+      });
+  
+      return true;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Erreur lors de la suppression du commentaire');
     }
+  }
+
+  async profil(id: number): Promise<UserSansMotDePasseDto> {
+    const utilisateur = await this.prisma.user.findUnique({ where: { id } });
   
-    const utilisateurModifie = await this.prisma.user.update({
-      where: { id: Number(id) },
-        data: donneesFiltrees,
-    });
+    if (!utilisateur) throw new Error('Utilisateur introuvable.');
   
-    const { mot_de_passe: _, ...utilisateurSansMdp } = utilisateurModifie;
-    return utilisateurSansMdp;
+    const { mot_de_passe, role, id: _, ...profil } = utilisateur;
+    return profil;
   }
 }

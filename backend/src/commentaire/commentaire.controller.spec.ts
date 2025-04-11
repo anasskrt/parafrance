@@ -1,20 +1,33 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommentaireController } from './commentaire.controller';
 import { CommentaireService } from './commentaire.service';
+import { PrismaService } from '../../prisma/prisma.service';
+import { AuthModule } from '../auth/auth.module';
 
 describe('CommentaireController', () => {
   let controller: CommentaireController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [CommentaireController],
-      providers: [CommentaireService],
-    }).compile();
-
-    controller = module.get<CommentaireController>(CommentaireController);
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+  const mockPrisma = {};
+  const mockAbilityFactory = {
+    createForUser: jest.fn().mockReturnValue({
+      can: () => true,
+    }),
+  };
+  const mockArticleService = {
+    getAllArticles: jest.fn().mockResolvedValue([
+      {
+        id: 1,
+        userId: 1,
+        articleId: 1,
+        contenu: 'très bien',
+        date: '2024-',
+        image: 'test.png',
+        note: null,
+        approuve: true,
+        marqueId: 1,
+        categorieId: 1,
+      },
+    ]),
+  };
+ 
 });

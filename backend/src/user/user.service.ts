@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { $Enums } from '@prisma/client';
-import { PrismaService } from '@prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { error } from 'console';
-import { UserSansMotDePasseDto } from 'src/auth/dto/user-sans-mdp.dto';
+import { UserSansMotDePasseDto } from '../auth/dto/user-sans-mdp.dto';
 
 
 @Injectable()

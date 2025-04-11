@@ -134,5 +134,5 @@ POST /commentaire/
 
 USER
 
-POST /user/article/{articleID}/addCommentaire | déplacement vers commentaire POST /commentaire/
+POST /user/article/{articleID}/addCommentaire | déplacement vers commentaire POST /commentaire/article/:id
 GET /user/

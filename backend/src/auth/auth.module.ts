@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { PrismaService } from '@prisma/prisma.service'; // Adjust the import path as necessary
+import { PrismaService } from '../../prisma/prisma.service'; // Adjust the import path as necessary
 import { JwtModule } from '@nestjs/jwt';
-import { AbilityFactory } from 'src/abilities/ability.factory';
+import { AbilityFactory } from '../abilities/ability.factory';
 import { AuthGuard } from './auth.guard';
 
 @Module({

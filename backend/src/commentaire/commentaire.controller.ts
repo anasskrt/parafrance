@@ -1,9 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { CommentaireService } from './commentaire.service';
 import { CreateCommentaireDto } from './dto/create-commentaire.dto';
-import { UpdateCommentaireDto } from './dto/update-commentaire.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { UserRequest } from 'src/auth/dto/user-request';
+import { AuthGuard } from '../auth/auth.guard';
+import { UserRequest } from '../auth/dto/user-request';
 
 @Controller('commentaire')
 export class CommentaireController {

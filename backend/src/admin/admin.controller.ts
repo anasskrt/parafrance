@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, ForbiddenException, Get, Post, Param, Req, UseGuards } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { AuthGuard } from '../auth/auth.guard';
-import { AbilityFactory } from 'src/abilities/ability.factory';
-import { UserRequest } from 'src/auth/dto/user-request';
+import { AbilityFactory } from '../abilities/ability.factory';
+import { UserRequest } from '../auth/dto/user-request';
 
 @UseGuards(AuthGuard)
 @Controller('admin')
@@ -33,7 +33,7 @@ export class AdminController {
     }
 
     //// Gestion des commentaires //// 
-    @Get('commentaire/:id')
+    @Delete('commentaire/:id')
     async getAllCommentaireArticle(@Param('id') id: string) {
         return this.adminService.deleteCommentaire(Number(id));
     }

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, ForbiddenException, Get, Param, Post, Req } from '@nestjs/common';
 import { ArticleService } from './article.service';
-import { UserRequest } from 'src/auth/dto/user-request';
-import { AbilityFactory } from 'src/abilities/ability.factory';
+import { UserRequest } from '../auth/dto/user-request';
+import { AbilityFactory } from '../abilities/ability.factory';
 import { CreateArticleDto } from './dto/create-article';
 
 @Controller('article')
@@ -16,7 +16,7 @@ export class ArticleController {
         return this.articleService.getAllArticles();
     }
 
-    @Get('/:id/commentaire')
+    @Get('/:id/commentaires')
     async getAllCommentaireArticle(@Param('id') id: string) {
         return this.articleService.getAllCommentairesByArticleId(Number(id));
     }

@@ -12,8 +12,6 @@
     "baseUrl": "./",
     "paths": {
       "@prisma/*": ["prisma/*"],
-      "@auth/*": ["auth/*"],
-      "@user/*": ["user/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

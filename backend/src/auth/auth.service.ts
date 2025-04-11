@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from '@prisma/prisma.service'; // Adjust the import path as necessary
+import { PrismaService } from '../../prisma/prisma.service'; // Adjust the import path as necessary
 import { Role } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { UserSansMotDePasseDto } from './dto/user-sans-mdp.dto';

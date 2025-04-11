@@ -96,3 +96,43 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+
+- GET /user   recupere**
+GET /articles/:id/commentaires
+POST /articles/:id/commentaires
+
+AUTH
+
+POST /auth/connexion
+POST /auth/inscription
+GET /auth/profil | déplacement vers USER GET /user/
+
+
+
+ARTICLE 
+
+GET /article/allArticles | GET /article
+GET /article/allCommentaireArticle/{id} | GET /article/{id}/commenaitre/{id}
+POST /article/
+DELETE /article/
+
+ADMIN 
+
+GET /admin/user/users | GET /admin/users
+DELETE /admin/user/deleteUser/{id} | DELETE /admin/user/{id}
+POST /admin/article/addArticle | déplacement vers article POST /article/
+GET /admin/article/deleteArticle/{id} | déplacement vers article DELETE /article/{id}
+GET /admin/commentaire/deleteCommentaire/{id} | déplacement vers commentaire DELETE /commentaire/{id}
+
+
+COMMENTAIRE
+
+DELETE /commentaire/{id}
+POST /commentaire/
+
+USER
+
+POST /user/article/{articleID}/addCommentaire | déplacement vers commentaire POST /commentaire/article/:id
+GET /user/

@@ -8,5 +8,5 @@ export class UserConnexion {
 
   @ApiProperty({ description: 'Mot de passe de l\'utilisateur' })
   @IsString()
-  note: string;
+  password: string;
 }

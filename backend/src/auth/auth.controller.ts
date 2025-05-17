@@ -17,7 +17,8 @@ export class AuthController {
 
   @Post('connexion')
   async connection(
-    @Body() donneesUtilisateur: any) : Promise<{ access_token: string }> {
+    @Body() donneesUtilisateur: UserConnexion) : Promise<{ access_token: string }> {
+      console.log(donneesUtilisateur)
     return this.authService.connexion(donneesUtilisateur);
   }
 }

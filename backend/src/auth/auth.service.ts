@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   async connexion(donnees: any) : Promise<{ access_token: string }> {
-    const { email, mot_de_passe } = donnees;
+    const { email, password } = donnees;
   
     const user = await this.prisma.user.findUnique({
       where: { email },
@@ -56,7 +56,7 @@ export class AuthService {
       throw new UnauthorizedException('Identifiants invalides');
     }
   
-    const passwordMatches = await bcrypt.compare(mot_de_passe, user.mot_de_passe);
+    const passwordMatches = await bcrypt.compare(password, user.mot_de_passe);
     if (!passwordMatches) {
       throw new UnauthorizedException('Identifiants invalides');
     }

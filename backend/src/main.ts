@@ -14,6 +14,11 @@ async function bootstrap() {
     .addBearerAuth() // Pour le JWT
     .build();
 
+    app.enableCors({
+      origin: 'http://localhost:3001', // ton app Next.js en dev
+      credentials: true, // si tu veux utiliser des cookies ou headers d'auth
+    });
+
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
